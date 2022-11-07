@@ -1,10 +1,25 @@
-import React from 'react';
+import React, {useContext } from "react";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { FaCartPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useParams,useNavigate } from "react-router-dom";
+import { DataContext } from "../../Context/data";
+
 
 export const Header = ()=> {
+ 
+  const {lista} = useContext(DataContext);
+
+  let navigate = useNavigate()
+  
+  function handleClick(){
+    navigate("/pedidos")
+  }
+
+  console.log('222',lista);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -27,10 +42,15 @@ export const Header = ()=> {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Ajuda</Nav.Link>
+            
             <Nav.Link eventKey={2} href="#memes">
               Login
             </Nav.Link>
+            <Nav.Link >
+          <FaCartPlus style={{color: 'white'}} onClick ={() =>handleClick()}/>
+            <h2 style={{color: 'white'}}>{lista.lenght}</h2>
+            </Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Container>

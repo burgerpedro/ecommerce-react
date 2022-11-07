@@ -1,13 +1,14 @@
 import React from 'react';
 import { Rotas } from './Components/Routes';
+import { Data } from './Context/data';
 
 
 
 function App() {
   return (
-    <>
-    <Rotas />
-    </>
+    <Data>
+      <Rotas />
+    </Data>
   );
 }
 

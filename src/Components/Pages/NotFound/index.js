@@ -2,8 +2,9 @@ import React from "react"
 
 export const NotFound = () => {
     return(
-        <>
-        <h1>Sou o NotFound</h1>
-        </>
+        
+        <div>
+            <h1>Not Found</h1>
+        </div>
     )
 }
