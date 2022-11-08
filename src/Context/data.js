@@ -27,7 +27,7 @@ export const Data = (props) => {
         } 
     
         setLista(itemObject);
-    
+        alert("Produto adicionado ao Carrinho")
       }
     
 

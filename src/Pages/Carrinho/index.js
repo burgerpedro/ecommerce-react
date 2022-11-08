@@ -3,6 +3,7 @@ import { DataContext } from "../../Context/data";
 import Table from "react-bootstrap/Table";
 import { FaTrash } from "react-icons/fa";
 import { apiLocal } from "../../Components/Services";
+import { ButtonMais, ButtonMenos } from "./style";
 
 export const Carrinho = () => {
   const { lista, aumentarItem, diminuirItem, removalItem } =
@@ -96,10 +97,10 @@ export const Carrinho = () => {
           <tbody>
             {lista.map((produto) => (
               <tr key={produto.id}>
-                <td>
+                <td style={{alignItems:"center",textAlign:"center" }}>
                   <img
                     src={produto.imagemUrl}
-                    style={{ width: "50px", height: "60px" }}
+                    style={{ width: "200px", height: "200px" , alignItems:"center",textAlign:"center" }}
                   ></img>
                 </td>
                 <td>{produto.nome}</td>
@@ -110,17 +111,17 @@ export const Carrinho = () => {
                   })}
                 </td>
                 <td>
-                  <button onClick={() => diminuirItem(produto)}>-</button>
+                  <ButtonMenos onClick={() => diminuirItem(produto)}>-</ButtonMenos>
                   <span>
                     {" "}
                     {produto.quantidade > 0
                       ? produto.quantidade
                       : removalItem(produto)}
                   </span>
-                  <button onClick={() => aumentarItem(produto)}>+</button>
+                  <ButtonMais onClick={() => aumentarItem(produto)}>+</ButtonMais>
                 </td>
                 <td>R${produto.valorUnitario * produto.quantidade}</td>
-                <td>
+                <td >
                   <FaTrash onClick={() => removalItem(produto)} />
                 </td>
 

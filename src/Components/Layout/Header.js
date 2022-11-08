@@ -28,7 +28,8 @@ export const Header = () => {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="/" className={styles.social_list}>
-          <span> Sei la</span>
+          <img src="https://evanston.libnet.info/images/events/evanston/Anime%20Club%20Logo.png" width={"70px"}></img>
+          <strong><span> Fun tasia</span></strong>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

@@ -22,6 +22,12 @@ export const Footer = () => {
       <p className={styles.copy_right}>
         <span>React Ecommerce</span> &copy; 2022
       </p>
+      <p>
+        <span>Endereco: Rua x , n° X, Petropolis,Rio de Janeiro</span>
+      </p>
+      <p>
+        <span>CNPJ: XX. XXX. XXX/0001-XX</span>
+      </p>
     </footer>
   )
 }

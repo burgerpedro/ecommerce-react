@@ -14,8 +14,10 @@ export const Categoria = () =>{
         setCategoria({...categoria,[event.target.name]:event.target.value})
     }
 
-    const  handleSubmit= async (event)=> {
+    const  handleSubmit = async (event)=> {
+      event.preventDefault();
       apiLocal.post(`/categoria`,categoria).then((result) => {
+        setCategoria("")
         } )
       }
 
@@ -29,12 +31,13 @@ export const Categoria = () =>{
    
    const handleDelete=(id)=>{
     const element = document.querySelector('#delete-request-error-handling .status'); 
-    apiLocal.delete(`/categoria/${id}`).then(response => element.innerHTML = 'Delete successful')
-      .catch(error => {
-          element.parentElement.innerHTML = `Error: ${error.message}`;
-          console.error('There was an error!', error);
-      });
-   }
+    apiLocal.delete(`/categoria/${id}`).then(() => {
+      alert("Post deleted!");
+      getCategorias();
+    });
+}
+
+
 
    const handlePut = (id) =>{
     apiLocal.put(`/categoria/${id}`,categoria).then()
