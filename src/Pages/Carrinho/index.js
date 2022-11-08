@@ -3,66 +3,55 @@ import { DataContext } from "../../Context/data";
 import Table from "react-bootstrap/Table";
 import { FaTrash } from "react-icons/fa";
 import { apiLocal } from "../../Components/Services";
-import { ButtonMais, ButtonMenos } from "./style";
+import { ButtonMais, ButtonMenos,Resumo } from "./style";
+import { Modal } from "react-bootstrap";
+import Button from 'react-bootstrap/Button';
+
 
 export const Carrinho = () => {
+  
+  
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const { lista, aumentarItem, diminuirItem, removalItem } =
     useContext(DataContext);
   const [total, setTotal] = useState(0);
   const [pedido, setPedido] = useState([]);
 
-  const [item, setItem] = useState([
+  const [item, setItem] = useState(
     {
-      dataEntrega: "2022-10-28",
-      dataEnvio: "2022-10-26",
+      dataEntrega: new Date(),
+      dataEnvio: new Date(),
       client: {
         id: 1,
       },
       items: [
-        {
-          produtoId: "",
-          quantidade: "",
-        },
+        // {
+          // produtoId: "",
+          // quantidade: "",
+        // },
       ],
     },
-  ]);
-
-  const pegarItens = () => {
-    for (let index = 0; index < lista.length; index++) {
-      setItem(...item, {
-        items: [
-          { produtoId: lista[index].id, quantidade: lista[index].quantidade },
-        ],
-      });
-    }
-  };
-
-  console.log("item", item);
-  // const pegarPedido = (produto) => {
-  //   const itemObject = [...lista];
-  //   const item = itemObject.find((p) => p.id === produto.id);
-  //   if (!item) {
-  //     itemObject.push({
-  //       dataEntrega: "2022-10-28",
-  //       dataEnvio: "2022-10-26",
-  //       client: {
-  //         id: 1,
-  //       },
-  //       items: [
-  //         {
-  //           produtoId: produto.id,
-  //           quantidade: produto.quantidade,
-  //         },
-  //       ],
-  //     });
-  //   }
-  //   setPedido(itemObject);
-  // };
+  );
 
   const handlePost = () => {
-    pegarItens();
-    apiLocal.post(`/pedido/`, pedido);
+    const arrayItens = lista.map((item) => {
+      const novoItem = {
+        "produtoId" : item.id,
+        "quantidade": item.quantidade,
+      }
+
+      return novoItem
+    })
+    
+   
+
+    apiLocal.post(`/pedido`, {...item, items:arrayItens});
+    handleShow();
   };
+
+
 
   const handlePrice = () => {
     let valor = 0;
@@ -76,7 +65,7 @@ export const Carrinho = () => {
     handlePrice();
   });
 
-  console.log("Pedido", pedido);
+ 
 
   return (
     <>
@@ -131,7 +120,9 @@ export const Carrinho = () => {
           </tbody>
         </Table>
       </div>
-      <h3>Total do Pedido</h3>
+      <Resumo>
+      <h3>Resumo do Pedido</h3>
+      <h4>Total do Pedido</h4>
       <h4>
         {" "}
         {total > 0
@@ -141,9 +132,23 @@ export const Carrinho = () => {
             })
           : "Seu carrino esta vazio"}
       </h4>
-      <div>
-        <button onClick={handlePost}> Enviar pedido</button>
-      </div>
+    
+      <Button variant="primary" onClick={handlePost} >
+        Confirmar Pedido
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Pedido</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Pedido enviado com sucesso</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      </Resumo>
     </>
   );
 };

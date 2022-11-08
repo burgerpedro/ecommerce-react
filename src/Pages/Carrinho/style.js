@@ -33,3 +33,8 @@ export const ButtonMais = styled.button`
     border-radius:35%;
    
 `
+export const Resumo = styled.div`
+border: 1px solid;
+text-align: center;
+
+`

@@ -5,6 +5,7 @@ import Table from "react-bootstrap/Table";
 import { apiLocal } from "../../../Components/Services";
 
 export const Produtos = () => {
+  
   const [produto, setProduto] = useState({
     nome: "",
     descricao: "",
@@ -15,6 +16,7 @@ export const Produtos = () => {
   const [produtos, setProdutos] = useState([]);
 
   function handleChange(event) {
+    event.preventDefault();
     setProduto({ ...produto, [event.target.name]: event.target.value });
   }
 
@@ -24,7 +26,7 @@ export const Produtos = () => {
 
   const handleGet = async () => {
     var response = await apiLocal.get(`/produtos`);
-    setCategorias(response.data);
+    setProdutos(response.data);
   };
 
   const handleDelete = (id) => {
@@ -69,6 +71,7 @@ export const Produtos = () => {
               type="number"
               min={1}
             ></input>
+             <label>valor Unitario</label>
             <input
               onChange={handleChange}
               value={produto.valorUnitario}
@@ -76,6 +79,7 @@ export const Produtos = () => {
               type="number"
               min={0.01}
             ></input>
+             <label>Imagem</label>
             <input
               onChange={handleChange}
               value={produto.imagemUrl}
@@ -105,7 +109,7 @@ export const Produtos = () => {
                 <td>{p.nome}</td>
                 <td>{p.descricao}</td>
                 <td>{p.qtdEstoque}</td>
-                <td>{valorUnitario}</td>
+                <td>{p.valorUnitario}</td>
                 <td>
                   <button onClick={() => handlePut(p.id)}>editar</button>
                   <button onClick={() => handleDelete(p.id)}>excluir</button>
