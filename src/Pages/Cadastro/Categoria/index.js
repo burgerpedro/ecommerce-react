@@ -14,8 +14,8 @@ export const Categoria = () =>{
         setCategoria({...categoria,[event.target.name]:event.target.value})
     }
 
-    function handleSubmit(event){
-        apiLocal.post(`/categoria`,categoria).then((result) => {
+    const  handleSubmit= async (event)=> {
+      apiLocal.post(`/categoria`,categoria).then((result) => {
         } )
       }
 

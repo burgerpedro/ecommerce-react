@@ -24,6 +24,7 @@ export const Header = () => {
   }
 
   return (
+  
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="/" className={styles.social_list}>
@@ -57,5 +58,6 @@ export const Header = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
   );
 };

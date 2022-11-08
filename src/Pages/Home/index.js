@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import { DataContext } from "../../Context/data";
 import { apiLocal } from "../../Components/Services";
 
+
 export const Home = () => {
   const [produtos, setProdutos] = useState([]);
   const { lista, adicionarLista } = useContext(DataContext);
@@ -69,6 +70,7 @@ export const Home = () => {
           </Carousel.Item>
         </Carousel>
       </div>
+
       <div>
         {produtos.map((produto) => {
           return (

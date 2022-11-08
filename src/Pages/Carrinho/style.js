@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 export const CardBox = styled.div`
 
-width: 200px;
-height: 350px;
+width: 300px;
+height: 500px;
 display:inline-block;
 margin-right: 2rem;
 margin-top: 2rem;
+margin-left: 2rem;
 
 overflow: hidden;
 border-radius: 5px;

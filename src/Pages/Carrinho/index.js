@@ -85,8 +85,8 @@ export const Carrinho = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>codigo</th>
               <th>Produto</th>
+              <th>Descricao</th>
               <th>Preco</th>
               <th>Quantidade</th>
               <th>subtotal</th>
@@ -131,11 +131,18 @@ export const Carrinho = () => {
         </Table>
       </div>
       <h3>Total do Pedido</h3>
-      {total > 0
-        ? total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
-        : "Seu carrino esta vazio"}
-
-      <button onClick={handlePost}> Enviar pedido</button>
+      <h4>
+        {" "}
+        {total > 0
+          ? total.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })
+          : "Seu carrino esta vazio"}
+      </h4>
+      <div>
+        <button onClick={handlePost}> Enviar pedido</button>
+      </div>
     </>
   );
 };
