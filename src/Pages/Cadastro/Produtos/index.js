@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { apiLocal } from "../../Services";
-import Table from "react-bootstrap/Table";
 
-export const Produto = () => {
+import Table from "react-bootstrap/Table";
+import { apiLocal } from "../../../Components/Services";
+
+export const Produtos = () => {
   const [produto, setProduto] = useState({
     nome: "",
     descricao: "",

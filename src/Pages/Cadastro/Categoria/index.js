@@ -1,13 +1,12 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { apiLocal } from "../../Services";
-import { LowBox } from "./style";
 import Table from 'react-bootstrap/Table';
+import { apiLocal } from "../../../Components/Services";
+
+
 
 export const Categoria = () =>{
     
-    const [categoria,setCategoria] =useState({nome:'',descricao:''})
+    const [categoria,setCategoria] =useState({})
     const [categorias,setCategorias] = useState([])
    
 
@@ -17,19 +16,28 @@ export const Categoria = () =>{
 
     function handleSubmit(event){
         apiLocal.post(`/categoria`,categoria).then((result) => {
-        })}
+        } )
+      }
 
     const getCategorias = async () => {
         var response = await apiLocal.get(`/categoria`)
         setCategorias(response.data)
    }
 
+   console.log("cat",categoria);
+
+   
    const handleDelete=(id)=>{
-      apiLocal.delete(`/categoria/${id}`)
+    const element = document.querySelector('#delete-request-error-handling .status'); 
+    apiLocal.delete(`/categoria/${id}`).then(response => element.innerHTML = 'Delete successful')
+      .catch(error => {
+          element.parentElement.innerHTML = `Error: ${error.message}`;
+          console.error('There was an error!', error);
+      });
    }
 
    const handlePut = (id) =>{
-    apiLocal.put(`/categoria/${id}`,categoria)
+    apiLocal.put(`/categoria/${id}`,categoria).then()
    }
 
     
@@ -38,6 +46,7 @@ export const Categoria = () =>{
         
     },[])
 
+    console.log(categoria.id)
 
     return(
           <div>
@@ -73,8 +82,8 @@ export const Categoria = () =>{
           <td>{cat.nome}</td>
           <td>{cat.descricao}</td>
           <td>
-            <button onClick={()=>handlePut(cat.id)} >editar</button>
-            <button onClick={()=>handleDelete(cat.id)}>excluir</button>
+            <button onClick={()=>handlePut(cat?.id)} >editar</button>
+            <button onClick={()=>handleDelete(cat?.id)}>excluir</button>
           </td>
         </tr>
          ))}

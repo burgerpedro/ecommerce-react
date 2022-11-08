@@ -1,60 +1,61 @@
-import React, {useContext } from "react";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { FaCartPlus } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { useParams,useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { FaCartPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { DataContext } from "../../Context/data";
+import styles from "./Header.module.css";
 
+export const Header = () => {
+  const { lista } = useContext(DataContext);
 
-export const Header = ()=> {
- 
-  const {lista} = useContext(DataContext);
+  let navigate = useNavigate();
 
-  let navigate = useNavigate()
-  
-  function handleClick(){
-    navigate("/pedidos")
+  let cartNavBar = 0;
+
+  const itenscart = () => {
+    for (let index = 0; index < lista.length + 1; index++) {
+      cartNavBar = index;
+    }
+  };
+  function handleClick() {
+    navigate("/carrinho");
   }
 
-  console.log('222',lista);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="/" className={styles.social_list}>
+          <span> Sei la</span>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">Home</Nav.Link>
-            <Nav.Link href="#pricing">SobreNos</Nav.Link>
-            <NavDropdown title="Cadastro" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">categoria</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                produtos
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">clientes</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Pedidos
-              </NavDropdown.Item>
-            </NavDropdown>
+            <Nav.Link href="/" className={styles.social_list}>
+            <span>Home</span>
+            </Nav.Link>
+            <Nav.Link href="/sobrenos" className={styles.social_list}>
+              <span>Contato</span>
+            </Nav.Link>
           </Nav>
           <Nav>
-            
-            <Nav.Link eventKey={2} href="#memes">
-              Login
+            <Nav.Link eventKey={2} href="/login" className={styles.social_list}>
+             <span>Login</span> 
             </Nav.Link>
-            <Nav.Link >
-          <FaCartPlus style={{color: 'white'}} onClick ={() =>handleClick()}/>
-            <h2 style={{color: 'white'}}>{lista.lenght}</h2>
+            <Nav.Link>
+              <FaCartPlus
+                style={{ color: "white" }}
+                onClick={() => handleClick()}
+              />
+              <span style={{ color: "white" }}>
+                {itenscart()}
+                {cartNavBar}
+              </span>
             </Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
-}
-
+};

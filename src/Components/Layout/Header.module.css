@@ -1,0 +1,7 @@
+.social_list span {
+    margin: 0 1em;
+  }
+  
+  .social_list span:hover {
+    color: #ffbb33;
+  }
