@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import styles from './Footer.module.css'
 
 
@@ -16,7 +16,7 @@ export const Footer = () => {
           <FaInstagram />
         </li>
         <li>
-          <FaLinkedin />
+          <FaTwitter />
         </li>
       </ul>
       <p className={styles.copy_right}>
